@@ -19,32 +19,32 @@ package examples.todolist.persistence.runtime
 import cats.Monad
 import doobie.implicits._
 import doobie.util.transactor.Transactor
-import examples.todolist.TodoItem
-import examples.todolist.persistence.TodoItemRepository
+import examples.todolist.model.Tag
+import examples.todolist.persistence.TagRepository
 
-class TodoItemRepositoryHandler[F[_]: Monad](implicit T: Transactor[F])
-    extends TodoItemRepository.Handler[F] {
+class TagRepositoryHandler[F[_]: Monad](implicit T: Transactor[F])
+    extends TagRepository.Handler[F] {
 
-  import examples.todolist.persistence.runtime.queries.TodoItemQueries._
+  import examples.todolist.persistence.runtime.queries.TagQueries._
 
-  def insert(item: TodoItem): F[Option[TodoItem]] =
-    insertQuery(item)
+  def insert(input: Tag): F[Option[Tag]] =
+    insertQuery(input)
       .withUniqueGeneratedKeys[Int]("id")
       .flatMap(getQuery(_).option)
       .transact(T)
 
-  def get(id: Int): F[Option[TodoItem]] =
+  def get(id: Int): F[Option[Tag]] =
     getQuery(id).option.transact(T)
 
-  def update(item: TodoItem): F[Option[TodoItem]] =
-    updateQuery(item).run
-      .flatMap(_ => getQuery(item.id.get).option)
+  def update(tag: Tag): F[Option[Tag]] =
+    updateQuery(tag).run
+      .flatMap(_ => getQuery(tag.id.get).option)
       .transact(T)
 
   def delete(id: Int): F[Int] =
     deleteQuery(id).run.transact(T)
 
-  def list: F[List[TodoItem]] =
+  def list: F[List[Tag]] =
     listQuery
       .to[List]
       .transact(T)

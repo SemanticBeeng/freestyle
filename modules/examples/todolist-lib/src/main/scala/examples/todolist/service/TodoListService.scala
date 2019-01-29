@@ -20,34 +20,34 @@ import cats.Monad
 import cats.implicits._
 import freestyle.tagless._
 import freestyle.tagless.logging.LoggingM
-import examples.todolist.TodoItem
-import examples.todolist.persistence.TodoItemRepository
+import examples.todolist.model.TodoList
+import examples.todolist.persistence.TodoListRepository
 
 @module
-trait TodoItemService[F[_]] {
+trait TodoListService[F[_]] {
 
   implicit val M: Monad[F]
   implicit val L: LoggingM[F]
 
-  val repo: TodoItemRepository[F]
+  val repo: TodoListRepository[F]
 
-  val model: String = classOf[TodoItem].getSimpleName
+  val model: String = classOf[TodoList].getSimpleName
 
-  def insert(item: TodoItem): F[Option[TodoItem]] =
+  def insert(item: TodoList): F[Option[TodoList]] =
     for {
       _            <- L.debug(s"Trying to insert a $model")
       insertedItem <- repo.insert(item)
       _            <- L.info(s"Tried to add a $model")
     } yield insertedItem
 
-  def retrieve(id: Int): F[Option[TodoItem]] =
+  def retrieve(id: Int): F[Option[TodoList]] =
     for {
       _    <- L.debug(s"Trying to retrieve a $model")
       item <- repo.get(id)
       _    <- L.info(s"Found ${item}")
     } yield item
 
-  def update(item: TodoItem): F[Option[TodoItem]] =
+  def update(item: TodoList): F[Option[TodoList]] =
     for {
       _           <- L.debug(s"Trying to update a $model")
       updatedItem <- repo.update(item)
@@ -61,13 +61,13 @@ trait TodoItemService[F[_]] {
       _           <- L.info(s"Tried to delete $model")
     } yield deletedItem
 
-  def batchedInsert(items: List[TodoItem]): F[List[Option[TodoItem]]] =
+  def batchedInsert(items: List[TodoList]): F[List[Option[TodoList]]] =
     for {
       _             <- L.debug(s"Trying to insert batch $model")
       insertedItems <- items.traverse(repo.insert)
     } yield insertedItems
 
-  def batchedUpdate(items: List[TodoItem]): F[List[Option[TodoItem]]] =
+  def batchedUpdate(items: List[TodoList]): F[List[Option[TodoList]]] =
     for {
       _            <- L.debug(s"Trying to update batch $model")
       updatedItems <- items.traverse(repo.update)
@@ -86,7 +86,7 @@ trait TodoItemService[F[_]] {
       _   <- L.warn(s"Reset $model table in repository")
     } yield ops
 
-  val list: F[List[TodoItem]] =
+  val list: F[List[TodoList]] =
     for {
       _     <- L.debug(s"Trying to get all $model models")
       items <- repo.list

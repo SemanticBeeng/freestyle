@@ -17,20 +17,20 @@
 package examples.todolist.persistence
 
 import freestyle.tagless.tagless
-import examples.todolist.Tag
+import examples.todolist.model.TodoItem
 
 @tagless(true)
-trait TagRepository[F[_]] {
+trait TodoItemRepository[F[_]] {
 
-  def insert(tag: Tag): F[Option[Tag]]
+  def insert(item: TodoItem): F[Option[TodoItem]]
 
-  def get(id: Int): F[Option[Tag]]
+  def get(id: Int): F[Option[TodoItem]]
+
+  def update(item: TodoItem): F[Option[TodoItem]]
 
   def delete(id: Int): F[Int]
 
-  def update(tag: Tag): F[Option[Tag]]
-
-  def list: F[List[Tag]]
+  def list: F[List[TodoItem]]
 
   def drop: F[Int]
 

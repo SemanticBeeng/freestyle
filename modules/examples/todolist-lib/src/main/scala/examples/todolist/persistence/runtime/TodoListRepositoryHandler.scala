@@ -19,7 +19,7 @@ package examples.todolist.persistence.runtime
 import cats.Monad
 import doobie.implicits._
 import doobie.util.transactor.Transactor
-import examples.todolist.TodoList
+import examples.todolist.model.TodoList
 import examples.todolist.persistence.TodoListRepository
 
 class TodoListRepositoryHandler[F[_]: Monad](implicit T: Transactor[F])

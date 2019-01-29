@@ -20,7 +20,7 @@ import cats.Monad
 import cats.implicits._
 import freestyle.tagless._
 import freestyle.tagless.effects.error.ErrorM
-import examples.todolist.{Tag, TodoForm, TodoList}
+import examples.todolist.model.{Tag, TodoForm, TodoList}
 import examples.todolist.persistence.AppRepository
 
 @module

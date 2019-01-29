@@ -19,7 +19,7 @@ package examples.todolist.persistence.runtime.queries
 import doobie.implicits.toSqlInterpolator
 import doobie.util.query.Query0
 import doobie.util.update.Update0
-import examples.todolist.TodoItem
+import examples.todolist.model.TodoItem
 
 object TodoItemQueries {
 

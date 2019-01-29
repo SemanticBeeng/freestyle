@@ -20,7 +20,7 @@ import cats.Monad
 import cats.implicits._
 import freestyle.tagless._
 import freestyle.tagless.logging.LoggingM
-import examples.todolist.Tag
+import examples.todolist.model.Tag
 import examples.todolist.persistence.TagRepository
 
 @module
