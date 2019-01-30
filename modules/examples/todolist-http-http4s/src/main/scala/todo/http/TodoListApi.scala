@@ -29,6 +29,7 @@ import org.http4s.dsl.Http4sDsl
 class TodoListApi[F[_]: Effect](implicit service: TodoListService[F]) extends Http4sDsl[F] {
 
   import codecs._
+  import examples.todolist.model.TodoList
 
   private val prefix = "lists"
 

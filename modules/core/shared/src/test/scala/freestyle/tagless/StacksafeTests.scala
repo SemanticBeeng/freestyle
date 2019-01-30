@@ -34,7 +34,10 @@ import algebras._
 import handlers._
 import modules._
 
+
 class TaglessStacksafeTests extends WordSpec with Matchers {
+
+  //final type FS[A] = Id[A]
 
   def ok: Unit = (0 shouldEqual 0)
 

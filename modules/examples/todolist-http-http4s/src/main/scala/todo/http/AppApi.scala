@@ -29,6 +29,7 @@ import org.http4s.dsl.Http4sDsl
 class AppApi[F[_]: Effect](implicit service: AppService[F]) extends Http4sDsl[F] {
 
   import codecs._
+  import examples.todolist.model.TodoForm
 
   val endpoints = HttpService[F] {
     case POST -> Root / "reset" =>

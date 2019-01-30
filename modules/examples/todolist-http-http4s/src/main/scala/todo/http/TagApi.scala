@@ -20,7 +20,7 @@ package http
 import cats.effect.Effect
 import cats.implicits._
 import examples.todolist.service.TagService
-import examples.todolist.Tag
+import examples.todolist.model.Tag
 import io.circe.generic.auto._
 import io.circe.syntax._
 import org.http4s._

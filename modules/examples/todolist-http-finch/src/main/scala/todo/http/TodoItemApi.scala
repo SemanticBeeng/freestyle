@@ -20,7 +20,7 @@ package http
 import cats._
 import cats.implicits._
 import com.twitter.util.Future
-import examples.todolist.TodoItem
+import examples.todolist.model.TodoItem
 import examples.todolist.service.TodoItemService
 import io.circe.generic.auto._
 import io.finch._

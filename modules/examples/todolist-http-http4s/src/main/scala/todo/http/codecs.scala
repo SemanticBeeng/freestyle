@@ -24,6 +24,7 @@ import org.http4s._
 import org.http4s.circe._
 
 object codecs {
+  import examples.todolist.model._
 
   implicit def tagEncoder[F[_]: Applicative]: EntityEncoder[F, Tag] = jsonEncoderOf[F, Tag]
   implicit def tagDecoder[F[_]: Sync]: EntityDecoder[F, Tag]        = jsonOf[F, Tag]
