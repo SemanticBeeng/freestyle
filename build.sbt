@@ -212,6 +212,14 @@ lazy val fetch = module("fetch", subFolder = Some("integrations"))
 lazy val fetchJVM = fetch.jvm
 lazy val fetchJS  = fetch.js
 
+//lazy val fs2 = jvmModule("shared", subFolder = Some("integrations/fs2"))
+//  .dependsOn(coreJVM)
+//  .settings(
+//    libraryDependencies ++= /*Seq(
+//      %%("fs2") //#todo
+//    ) ++ */commonDeps
+//  )
+
 /////////////////////////////
 //// INTEGRATIONS - HTTP ////
 /////////////////////////////
@@ -329,6 +337,7 @@ lazy val jvmModules: Seq[ProjectReference] = Seq(
   slick,
   twitterUtil,
   fetchJVM,
+  //fs2,
   httpHttp4s,
   httpFinch,
   httpAkka,
